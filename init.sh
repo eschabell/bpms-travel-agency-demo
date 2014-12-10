@@ -80,6 +80,11 @@ echo
 echo "	- adding acmeDataModel-1.0.jar to business-central.war/WEB-INF/lib"
 cp -r $PRJ_DIR/acme-data-model/target/acmeDataModel-1.0.jar $SERVER_DIR/business-central.war/WEB-INF/lib
 
+echo
+echo "  - deploying external-client-ui-form-1.0.war to EAP deployments directory"
+cp -r $PRJ_DIR/external-client-ui-form/target/external-client-ui-form-1.0.war $SERVER_DIR/
+
+echo
 echo "  - setting up standalone.xml configuration adjustments..."
 echo
 cp $SUPPORT_DIR/standalone.xml $SERVER_CONF
@@ -87,6 +92,10 @@ cp $SUPPORT_DIR/standalone.xml $SERVER_CONF
 echo "  - making sure standalone.sh for server is executable..."
 echo
 chmod u+x $JBOSS_HOME/bin/standalone.sh
+
+echo "  - updating the CustomWorkItemHandler.conf file to use the appropriate email server..."
+echo
+cp -f $SUPPORT_DIR/CustomWorkItemHandlers.conf $SERVER_DIR/business-central.war/WEB-INF/classes/META-INF
 
 # Optional: uncomment this to install mock data for BPM Suite.
 #
